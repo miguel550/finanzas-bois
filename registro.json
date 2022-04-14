@@ -30,6 +30,5 @@
         }
     ],
     "payments": [
-      {"who": "Will", "to":  "Luis", "amount": 100, "when": "2022-04-14"}
     ]
 }
