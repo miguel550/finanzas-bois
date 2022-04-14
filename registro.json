@@ -1,0 +1,35 @@
+{
+    "bois": [
+      { "id": "Miguel", "default": true},
+      { "id": "Raudy", "default": true},
+      { "id": "Pedro", "default": true},
+      { "id": "Luis", "default": true},
+      { "id": "Valera", "default": true},
+      { "id": "Cesar", "default": true},
+      { "id": "Joshua", "default": true},
+      { "id": "Will", "default": true},
+      { "id": "Brayan", "default": true},
+      "KeudyRD",
+      "Jeffrey",
+      "Sinver"
+    ],
+    "expenses": [
+        {
+            "when": "2022-04-04",
+            "who": "Pedro",
+            "expense": "Jarabacoa House",
+            "amount": 2500,
+            "add_to_debt": ["KeudyRD", "Jeffrey", "Sinver"]
+        },
+        {
+            "when": "2022-04-04",
+            "who": "Luis",
+            "expense": "Jarabacoa House",
+            "amount": 2500,
+            "add_to_debt": ["KeudyRD", "Jeffrey", "Sinver"]
+        }
+    ],
+    "payments": [
+      {"who": "Will", "to":  "Luis", "amount": 100, "when": "2022-04-14"}
+    ]
+}

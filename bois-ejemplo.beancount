@@ -1,0 +1,35 @@
+2022-04-09 open Liabilities:Bois:Miguel
+2022-04-09 open Liabilities:Bois:Luis
+2022-04-09 open Liabilities:Bois:Joshua
+2022-04-09 open Liabilities:Bois:Cesar
+2022-04-09 open Liabilities:Bois:Raudy
+2022-04-09 open Liabilities:Bois:Valera
+2022-04-09 open Liabilities:Bois:Pedro
+2022-04-09 open Liabilities:Bois:KeudyRD
+2022-04-09 open Liabilities:Bois:Will
+2022-04-09 open Liabilities:Bois:Brayan
+2022-04-09 open Assets:CoroPagos
+2022-04-09 open Expenses:LirolSisal
+
+2022-04-09 open Equity:Opening-Balances
+
+2022-04-09 * "Coro ejemplo" #Raudy
+  Liabilities:Bois:Raudy      -1000 DOP
+  Expenses:LirolSisal          1000 DOP
+
+2022-04-09 * "Coro ejemplo" "Se le debe a Raudy" #Raudy
+  Liabilities:Bois:Raudy     1000 DOP
+  Liabilities:Bois:Miguel   -100 DOP
+  Liabilities:Bois:Luis     -100 DOP
+  Liabilities:Bois:Joshua   -100 DOP
+  Liabilities:Bois:Cesar    -100 DOP
+  Liabilities:Bois:Valera   -100 DOP
+  Liabilities:Bois:Pedro    -100 DOP
+  Liabilities:Bois:KeudyRD  -100 DOP
+  Liabilities:Bois:Will     -100 DOP
+  Liabilities:Bois:Brayan   -100 DOP
+  Assets:CoroPagos          -100 DOP ; auto pago para raudy uwu
+
+2022-04-09 * "Coro ejemplo" "Se le pago a Raudy" #Raudy
+    Liabilities:Bois:Miguel 100 DOP
+    Assets:CoroPagos        -100 DOP
