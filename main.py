@@ -77,12 +77,7 @@ class Importer(importer.ImporterProtocol):
             None,
             None
         ))
-        all_bois = set(list(
-            boi['id']
-            for boi in bois
-            if isinstance(boi, dict) and boi.get('default', False)
-        ) + expense.get('add_to_debt', []))
-
+        all_bois = expense['split_between']
         debt = round(amnt/len(all_bois), 2)
         for boi in all_bois:
             if boi == expense['who']:
@@ -120,24 +115,14 @@ class Importer(importer.ImporterProtocol):
             finanzas_dict = json.loads(f.read())
         entries = []
         for boi in finanzas_dict['bois']:
-            if isinstance(boi, str):
-                entries.append(data.Open(
-                    self.get_new_meta(file.name),
-                    # here I'm assuming first datetime is the earliest date
-                    datetime.date.fromisoformat(finanzas_dict['expenses'][0]['when']),
-                    f'Liabilities:Bois:{boi}',
-                    '',
-                    data.Booking.NONE
-                ))
-            elif isinstance(boi, dict):
-                entries.append(data.Open(
-                    self.get_new_meta(file.name),
-                    # here I'm assuming first datetime is the earliest date
-                    datetime.date.fromisoformat(finanzas_dict['expenses'][0]['when']),
-                    f'Liabilities:Bois:{boi["id"]}',
-                    '',
-                    data.Booking.NONE
-                ))
+            entries.append(data.Open(
+                self.get_new_meta(file.name),
+                # here I'm assuming first datetime is the earliest date
+                datetime.date.fromisoformat(finanzas_dict['expenses'][0]['when']),
+                f'Liabilities:Bois:{boi}',
+                '',
+                data.Booking.NONE
+            ))
 
         entries.append(data.Open(
             self.get_new_meta(file.name),

@@ -1,33 +1,111 @@
 {
     "bois": [
-      { "id": "Miguel", "default": true},
-      { "id": "Raudy", "default": true},
-      { "id": "Pedro", "default": true},
-      { "id": "Luis", "default": true},
-      { "id": "Valera", "default": true},
-      { "id": "Cesar", "default": true},
-      { "id": "Joshua", "default": true},
-      { "id": "Will", "default": true},
-      { "id": "Brayan", "default": true},
+      "Miguel",
+      "Raudy",
+      "Pedro",
+      "Luis",
+      "Valera",
+      "Cesar",
+      "Joshua",
+      "Will",
+      "Brayan",
       "KeudyRD",
       "Jeffrey",
-      "Sinver"
+      "Sinver",
+      "Veci",
+      "Orlando",
+      "Christian",
+      "Rene"
     ],
     "expenses": [
-        {
-            "when": "2022-04-04",
-            "who": "Pedro",
-            "expense": "Jarabacoa House",
-            "amount": 2500,
-            "add_to_debt": ["KeudyRD", "Jeffrey", "Sinver"]
-        },
-        {
-            "when": "2022-04-04",
-            "who": "Luis",
-            "expense": "Jarabacoa House",
-            "amount": 2500,
-            "add_to_debt": ["KeudyRD", "Jeffrey", "Sinver"]
-        }
+      {
+        "when": "2022-04-04",
+        "who": "Pedro",
+        "expense": "Jarabacoa House",
+        "amount": 2500,
+        "split_between": [
+          "Miguel",
+          "Raudy",
+          "Pedro",
+          "Luis",
+          "Valera",
+          "Cesar",
+          "Joshua",
+          "Will",
+          "Brayan",
+          "KeudyRD",
+          "Jeffrey",
+          "Sinver"
+        ]
+      },
+      {
+        "when": "2022-04-04",
+        "who": "Luis",
+        "expense": "Jarabacoa House",
+        "amount": 2500,
+        "split_between": [
+          "Miguel",
+          "Raudy",
+          "Pedro",
+          "Luis",
+          "Valera",
+          "Cesar",
+          "Joshua",
+          "Will",
+          "Brayan",
+          "KeudyRD",
+          "Jeffrey",
+          "Sinver"
+        ]
+      },
+      {
+        "when": "2022-04-15",
+        "who": "Will",
+        "expense": "Colmado donde raudy",
+        "description": "Cena epaguetti, by Joshua",
+        "amount": 1480,
+        "split_between": [
+          "Miguel",
+          "Raudy",
+          "Pedro",
+          "Valera",
+          "Cesar",
+          "Joshua",
+          "Brayan",
+          "Veci",
+          "Orlando",
+          "Christian",
+          "Rene"
+        ]
+      },
+      {
+        "when": "2022-04-16",
+        "who": "Pedro",
+        "expense": "Colmado donde raudy",
+        "description": "Comida arroz con huevo y salami, by Joshua",
+        "amount": 400,
+        "split_between": [
+          "Miguel",
+          "Raudy",
+          "Cesar",
+          "Joshua",
+          "Will"
+        ]
+      },
+      {
+        "when": "2022-04-16",
+        "who": "Pedro",
+        "expense": "LirolSisal",
+        "description": "Lo muchachone querian cenar pizza",
+        "amount": 1420,
+        "split_between": [
+          "Raudy",
+          "Cesar",
+          "Joshua",
+          "Will",
+          "KeudyRD"
+        ]
+      }
     ],
     "payments": [
     ]
