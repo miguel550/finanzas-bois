@@ -6,7 +6,6 @@ import sys
 import io
 import pathlib
 import argparse
-import time
 
 import parsedatetime
 from beancount.ingest import importer, extract
@@ -15,7 +14,11 @@ from beancount.loader import load_string
 from beancount.core import data, flags, amount
 
 
-class Importer(importer.ImporterProtocol):
+# TODO: Fix when two bois owe each other money for example:
+# Will owe 303.34 to Pedro and Pedro owe 123.33 to Will,
+# It should say that Pedro doesn't owe to Will and Will only owes 180.01 to Pedro
+
+class BoizRegisterImporter(importer.ImporterProtocol):
 
     def __init__(self):
         self.counter = 0
@@ -175,7 +178,7 @@ class Importer(importer.ImporterProtocol):
 
 
 CONFIG = [
-    Importer()
+    BoizRegisterImporter()
 ]
 
 
@@ -208,6 +211,8 @@ def get_args():
     return args
 
 
+# TODO: It should say why a boi owe that amount to the boi
+# Possible fix: modify narration to show for example 1/6th of Expense name
 def main():
     if len(sys.argv) == 1:
         return
