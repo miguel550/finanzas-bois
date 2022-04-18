@@ -108,5 +108,11 @@
       }
     ],
     "payments": [
+      {"who":  "Rene", "to":  "Will", "when": "2022-04-17", "amount":  123.33, "reason":  "epaguetti"},
+      {"who":  "Joshua", "to":  "Will", "when": "2022-04-17", "amount":  123.33, "reason":  "epaguetti"},
+      {"who":  "Brayan", "to":  "Will", "when": "2022-04-17", "amount":  123.33, "reason": "epaguetti"},
+      {"who":  "Raudy", "to":  "Will", "when": "2022-04-18", "amount":  123.33, "reason": "epaguetti"},
+      {"who":  "Christian", "to":  "Will", "when": "2022-04-18", "amount":  123.33, "reason": "epaguetti"},
+      {"who":  "Orlando", "to":  "Will", "when": "2022-04-18", "amount":  123.33, "reason": "epaguetti"}
     ]
 }
