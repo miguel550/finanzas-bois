@@ -35,7 +35,8 @@
           "Brayan",
           "KeudyRD",
           "Jeffrey",
-          "Sinver"
+          "Sinver",
+          "Rene"
         ]
       },
       {
@@ -55,7 +56,8 @@
           "Brayan",
           "KeudyRD",
           "Jeffrey",
-          "Sinver"
+          "Sinver",
+          "Rene"
         ]
       },
       {
@@ -113,6 +115,7 @@
       {"who":  "Brayan", "to":  "Will", "when": "2022-04-17", "amount":  123.33, "reason": "epaguetti"},
       {"who":  "Raudy", "to":  "Will", "when": "2022-04-18", "amount":  123.33, "reason": "epaguetti"},
       {"who":  "Christian", "to":  "Will", "when": "2022-04-18", "amount":  123.33, "reason": "epaguetti"},
-      {"who":  "Orlando", "to":  "Will", "when": "2022-04-18", "amount":  123.33, "reason": "epaguetti"}
+      {"who":  "Orlando", "to":  "Will", "when": "2022-04-18", "amount":  123.33, "reason": "epaguetti"},
+      {"who":  "Will", "to":  "Pedro", "when": "2022-04-19", "amount":  305, "reason": "desayuno y abono jarabacoa"}
     ]
 }
