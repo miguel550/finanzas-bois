@@ -6,6 +6,7 @@ import sys
 import io
 import pathlib
 import argparse
+import colorama
 
 import parsedatetime
 from beancount.ingest import importer, extract
@@ -66,7 +67,7 @@ class BoizRegisterImporter(importer.ImporterProtocol):
         postings = []
         postings.append(data.Posting(
             self.get_boi_account(payment["who"]),
-            amount.Amount(decimal.Decimal(payment['amount']), 'DOP'),
+            amount.Amount(round(decimal.Decimal(payment['amount']), 2), 'DOP'),
             None,
             None,
             None,
@@ -74,7 +75,7 @@ class BoizRegisterImporter(importer.ImporterProtocol):
         ))
         postings.append(data.Posting(
             self.get_coro_pago_account(),
-            -amount.Amount(decimal.Decimal(payment['amount']), 'DOP'),
+            -amount.Amount(round(decimal.Decimal(payment['amount']), 2), 'DOP'),
             None,
             None,
             None,
@@ -118,8 +119,8 @@ class BoizRegisterImporter(importer.ImporterProtocol):
             self.get_new_meta(file.name),
             datetime.date.fromisoformat(expense['when']),
             flags.FLAG_OKAY,
-            None,
-            f'Se le debe a {expense["who"]} uwu',
+            expense["who"],
+            f'1/{len(all_bois)}th {expense.get("description", expense["expense"])}',
             {expense['who']},
             data.EMPTY_SET,
             postings
@@ -214,6 +215,7 @@ def get_args(bois: list):
     parser.add_argument('boi_name', choices=bois, help='Nombre del boi al que quieres ver quienes les deben.', type=str)
     parser.add_argument('-d', '--date', help='Relative or ISO date', type=str)
     parser.add_argument('--keepdb', help='', action=argparse.BooleanOptionalAction)
+    parser.add_argument('--color', help='', action=argparse.BooleanOptionalAction)
 
     args = parser.parse_args()
     return args
@@ -223,6 +225,33 @@ def get_bois_names():
     with open(REGISTRO_PATH, 'r') as f:
         j = json.load(f)
         return j['bois']
+
+
+WITH_COLOR = True
+
+
+def print_red(value: str, **kwargs):
+    if not WITH_COLOR:
+        print(value, **kwargs)
+        return
+    print(colorama.Fore.RED + value, **kwargs)
+    print(colorama.Style.RESET_ALL, end='')
+
+
+def print_blue(value: str, **kwargs):
+    if not WITH_COLOR:
+        print(value, **kwargs)
+        return
+    print(colorama.Fore.BLUE + value, **kwargs)
+    print(colorama.Style.RESET_ALL, end='')
+
+
+def print_gree(value: str, **kwargs):
+    if not WITH_COLOR:
+        print(value, **kwargs)
+        return
+    print(colorama.Fore.GREEN + value, **kwargs)
+    print(colorama.Style.RESET_ALL, end='')
 
 
 # TODO: It should say why a boi owe that amount to the boi
@@ -237,10 +266,13 @@ def main():
     if args.keepdb:
         with open('db.beancount', 'w') as f:
             f.write(file_content)
+    if args.color is False:
+        global WITH_COLOR
+        WITH_COLOR = False
     entries, errors, options = load_string(file_content)
     if not a_quien_se_le_debe:
         return
-    select = f"select account, sum(position) where '{a_quien_se_le_debe}' in tags"
+    select = f"select account, sum(position), narration where '{a_quien_se_le_debe}' in tags"
     if args.date:
         select += f" and date = DATE('{parse_datetime(args.date)}')"
     res_types, res_rows = run_query(
@@ -249,18 +281,34 @@ def main():
         select,
         numberify=True
     )
+    reasons = {}
+    for row in res_rows:
+        if row[0].startswith('Liabilities'):
+            if row[0] not in reasons:
+                reasons[row[0]] = []
+            reasons[row[0]].append({'amount': -row[1], 'reason': row[2]})
+    shown = {}
     for row in res_rows:
         if not row[1]:
             continue
+        if row[0] in shown:
+            continue
+        if row[0] in reasons and 0 == sum(reason['amount'] for reason in reasons[row[0]]):
+            continue
+        shown[row[0]] = True
         if row[0] == 'Assets:CoroPago':
             continue
         if row[0].startswith('Expense'):
             print('En que gasto ->', end=' ')
-        print(row[0].split(':')[-1], end=' ')
+        print_gree(row[0].split(':')[-1], end=' ')
         if row[0].startswith('Liabilities'):
             print('le debe', end=' ')
-            row[1] *= -1
-        print(row[1])
+            row[1] = sum(reason['amount'] for reason in reasons[row[0]])
+        print_red(str(row[1]))
+        if row[0].startswith('Liabilities'):
+            for reason in reasons[row[0]]:
+                print_red(f'\t{reason["amount"]} ', end='')
+                print_blue(reason["reason"])
 
 
 if __name__ == '__main__':
